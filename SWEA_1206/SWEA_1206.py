@@ -15,9 +15,15 @@ for task in range(1, 11):
             if building[n] <= building[n-2] or building[n] <= building[n-1] or building[n] <= building[n+1] or building[n] <= building[n+2]: # n번째 빌딩 좌우 2칸까지 어느 하나라도 더 높으면 조망층 0개
                 pass
             else:
-                lst_light_floor = sorted([building[n]-building[n-2], building[n]-building[n-1], building[n]-building[n+1], building[n]-building[n+2]]) # 가장 작은 값이 조망층 개수, sorting
-                light_floor = lst_light_floor[0] # 오름차순 list, 0번째가 최소
-                sum_light_floor = sum_light_floor + light_floor # 조망층 합
+                lst_light_floor = [building[n]-building[n-2], building[n]-building[n-1], building[n]-building[n+1], building[n]-building[n+2]] # 가장 작은 값이 조망층 개수, sorting
+
+                min_floor = 255
+
+                for floor_num in lst_light_floor:
+                    if min_floor > floor_num:
+                        min_floor = floor_num
+
+                sum_light_floor = sum_light_floor + min_floor # 조망층 합
 
         return sum_light_floor
 
