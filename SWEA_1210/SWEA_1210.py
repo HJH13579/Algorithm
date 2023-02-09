@@ -1,56 +1,50 @@
+# IndexError: list index out of range
+# 인덱스에러의 해결 방법 중 하나 : Padding
+
+# 돌아가지 못하도록 코딩을 강제로 짜는 것보다 지나간 변수를 막거나 제거하는 것이 더 효율적일 수 있다.
+
 import sys
 
 sys.stdin = open("input.txt", "r")
 
-def going_side(y, x):
-    if lst[y][x - 1] == 1:
-        x -= 1
-    if lst[y][x + 1] == 1:
-        x += 1
-    if
-
-def going_up(y, x):
-    if lst[y][x - 1] == 0 and lst[y][x + 1] == 0:
-        y -= 1
-    else going_side(y, x):
-
-
-
+di = [-1, 0, 0]
+dj = [0, -1, 1]
 
 for tck in range(1, 11):
     dummy = int(input())
 
-    lst = [list(map(int, input().split())) for _ in range(100)]
+    arr = [[0] + list(map(int, input().split())) + [0] for _ in range(100)]
 
     # 도착점(2)의 index 값 구하기
-    for i in range(100):
-        if lst[99][i] == 2:
-            i_end = i
-
-    y = 99
-
-    # 좌우에 1이 없으면 위로, 있으면 위아래로 1이 있을 때까지 좌/우로 이동
-    while(1):
-        if lst[y][i_end - 1] == 0 and lst[y][i_end + 1] == 0:
-            y -= 1
-
-        else:
-            if lst[y][i_end - 1] == 1:
-                i_end -= 1
-            if lst[y][i_end + 1] == 1:
-                i_end += 1
-
-        if y == 0:
+    for j in range(102):
+        if arr[99][j] == 2:
+            j_end = j
             break
 
+    i = 99
+    j = j_end
+    dr = 0
 
+    while i > 0:
 
-    # 재귀함수
+        ni, nj = i + di[dr], j + dj[dr]
+        i, j = ni, nj
 
-    def up_or_side():
-        if y == 0:
-            return i_end
+        if arr[i][j - 1] == 1:
+            j -= 1
+            while arr[i - 1][j] == 0:
+                dr = 1
+                ni, nj = i + di[dr], j + dj[dr]
+                i, j = ni, nj
+            i -= 1
+        elif arr[i][j + 1] == 1:
+            j += 1
+            while arr[i - 1][j] == 0:
+                dr = 2
+                ni, nj = i + di[dr], j + dj[dr]
+                i, j = ni, nj
+            i -= 1
+        elif arr[i][j + 1] == 0 and arr[i][j - 1] == 0:
+            dr = 0
 
-        if
-
-    print(f'#{tck} {i_end}')
+    print(f'#{tck} {j}')
