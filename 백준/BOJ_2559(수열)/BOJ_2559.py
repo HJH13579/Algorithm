@@ -1,26 +1,29 @@
+# 투포인터 알고리즘
+
 import sys
 sys.stdin = open("input.txt", "r")
 
-for _ in range(2):
+for _ in range(3):
     N, K = map(int, input().split())
     lst = list(map(int, input().split()))
 
-    mx = 0
-    for x in range(5):
-        mx += sorted(lst, reverse=True)[x]
+    start = 0
+    end = K-1
+    sm = 0
 
-    max_sum = -100 * K
+    for s in range(start, end+1):
+        sm += lst[s]
+        mx = sm
 
-    for idx in range(N-K+1):
-        sm = 0
-        for i in range(idx, idx+K):
-            sm += lst[i]
+    while end < N-1:
+        sm -= lst[start]
 
-        if sm == mx:
-            max_sum = mx
-            break
+        start += 1
+        end += 1
 
-        elif max_sum < sm:
-            max_sum = sm
+        sm += lst[end]
 
-    print(max_sum)
+        if mx < sm:
+            mx = sm
+
+    print(mx)
