@@ -2,24 +2,18 @@
 #  +6 +12 +18 +24
 N = int(input())
 
-arr = [[1]]
+n = 0
+start_num = 1
+floor = 1
 
-n = 1
-cnt = 1
+while 6 * n + start_num < N:
+    start_num += 6 * n
+    n += 1
+    floor += 1
 
-while n < N:
-    lst = []
-    for k in range(n+1, 6*cnt + n + 1):
-        lst.append(k)
+# 1 : 0 1 1
+# 2~7 : 1 1 2
+# 8~19 : 2 7 3
+# 20~37 : 3 19 4
 
-    arr.append(lst)
-    cnt += 1
-    n = 6*cnt + n
-
-last_lst = []
-for p in range(n+1, N+1):
-    last_lst.append(p)
-
-arr.append(last_lst)
-
-print(arr)
+print(floor)
