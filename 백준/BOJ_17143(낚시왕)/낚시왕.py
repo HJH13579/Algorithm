@@ -2,12 +2,13 @@ dic_direction = {1: (1, 0), 2: (-1, 0), 3: (0, 1), 4:(0, -1)}
 
 # [3] 상어 이동
 def shark_migration():
+    new_arr = [[0] * (C + 2) for _ in range(R + 2)]
     for idx_y in range(1, R+1):
         for idx_x in range(1, C+1):
             if arr[idx_y][idx_x] != 0:
 
-                arr[idx_y][idx_x] = 0
 
+    return new_arr
 
 
 
@@ -38,7 +39,7 @@ while n != C+1:
             break
 
     # [3] 상어 이동
-    shark_migration()
+    arr = shark_migration()
 
 print(arr)
 
