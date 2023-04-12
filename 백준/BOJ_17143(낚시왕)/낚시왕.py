@@ -1,4 +1,4 @@
-dic_direction = {1: (1, 0), 2: (-1, 0), 3: (0, 1), 4:(0, -1)}
+dic_direction = {1: (-1, 0), 2: (1, 0), 3: (0, 1), 4:(0, -1)}
 
 # [3] 상어 이동
 def shark_migration():
@@ -6,7 +6,10 @@ def shark_migration():
     for idx_y in range(1, R+1):
         for idx_x in range(1, C+1):
             if arr[idx_y][idx_x] != 0:
-
+                for key in dic_direction.keys():
+                    if key == arr[idx_y][idx_x][1]:
+                        new_idx_y = idx_y + dic_direction[key][0]
+                        new_idx_x = idx_x + dic_direction[key][1]
 
     return new_arr
 
