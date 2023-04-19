@@ -1,27 +1,25 @@
-def popping(lst, idx):
-    if idx <= 3:
-        second_idx = idx + 2
-    else:
-        second_idx = idx - 2
-    a = lst[idx]
-    b = lst[second_idx]
-    lst.remove(a)
-    lst.remove(b)
-    return max(lst)
+dic_dice_idx = {0: 5, 1: 3, 2: 4, 3: 1, 4: 2, 5: 0}
 
 def dice_side_sum(idx, n, sm):
     global ans
     if n == N-1:
-        ans = max(ans, sm)
+        final_idx = dic_dice_idx[idx]
+        arr[n][idx] = 0
+        arr[n][final_idx] = 0
+        ans = max(ans, sm + max(arr[n]))
         return
 
+    opposite_idx = 0
     next_idx = 0
     for i in range(6):
         if arr[n][idx] == arr[n+1][i]:
+            opposite_idx = dic_dice_idx[idx]
             next_idx = i
             break
+    arr[n][idx] = 0
+    arr[n][opposite_idx] = 0
 
-    dice_side_sum(next_idx, n+1, sm+popping(arr[n], idx))
+    dice_side_sum(next_idx, n+1, sm + max(arr[n]))
 
 N = int(input())
 
